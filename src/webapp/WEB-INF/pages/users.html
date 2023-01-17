@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Users</h2>
+<br>
+<div align="center" style="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px">
+
+    <table border="1" cellpadding="1" cellspacing="1" style="width:500px">
+        <tbody>
+        <tr>
+            <td style="text-align:center">id</td>
+            <td>name</td>
+            <td>lastname</td>
+            <td>age</td>
+            <td>edit</td>
+            <td>delete</td>
+        </tr>
+        </tbody>
+
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getName()}">name</td>
+            <td th:text="${user.getSurName()}">lastname</td>
+            <td th:text="${user.getAge()}">age</td>
+
+            <td style="text-align: center">
+                <form th:method="GET" th:action="@{/users/{id}/edit(id=${user.getId()})}">
+                    <label>
+                        <input style="background-color: beige" th:type="submit" th:value="Edit">
+                    </label>
+                </form>
+            </td>
+
+            <td style="text-align: center">
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <label style="background-color:black">
+                        <input style="background-color: beige" th:type="submit" th:value="Delete">
+                    </label>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<br>
+
+<div style="margin-left:40px; text-align:center">
+    <form th:method="GET" th:action="@{/users/new}">
+        <label>
+            <input name="submit" type="submit" value="Add">
+        </label>
+    </form>
+</div>
+</body>
+</html>
